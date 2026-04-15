@@ -1,0 +1,35 @@
+function analyze() {
+
+    let resume = document.getElementById("resumeText").value.toLowerCase();
+    let role = document.getElementById("jobRole").value;
+    let skillsList = document.getElementById("skillsList");
+
+    skillsList.innerHTML = "";
+
+    let skills = [];
+
+    if (role === "Software Developer") {
+        skills = ["Python", "Data Structures", "Algorithms", "Git"];
+    }
+    else if (role === "Data Analyst") {
+        skills = ["Excel", "SQL", "Power BI", "Statistics"];
+    }
+    else if (role === "AI Engineer") {
+        skills = ["Machine Learning", "Deep Learning", "Python", "NLP"];
+    }
+
+    let missing = 0;
+
+    skills.forEach(skill => {
+        if (!resume.includes(skill.toLowerCase())) {
+            let li = document.createElement("li");
+            li.innerText = "⚡ " + skill;
+            skillsList.appendChild(li);
+            missing++;
+        }
+    });
+
+    let percentage = ((skills.length - missing) / skills.length) * 100;
+
+    document.getElementById("progressBar").style.width = percentage + "%";
+}
